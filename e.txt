@@ -1,0 +1,26 @@
+model = Sequential([
+    data_augment,
+    layers.Conv2D(16, 3, padding='same', activation='relu'),
+    layers.MaxPooling2D(),
+    layers.Dropout(0.2),
+    layers.Conv2D(32, 3, padding='same', activation='relu'),
+    layers.MaxPooling2D(),
+    layers.Dropout(0.2),
+    layers.Conv2D(64, 3, padding='same', activation='relu'),
+    layers.MaxPooling2D(),
+    layers.Dropout(0.2),
+    
+    layers.Flatten(),
+    
+    layers.Dense(128, activation='relu'),
+    layers.Dropout(0.2),
+    layers.Dense(70, activation='relu'),
+    layers.Dropout(0.2),
+    layers.Dense(7, activation='softmax'),
+])
+
+model.compile(optimizer='adam',
+             loss='sparse_categorical_crossentropy',
+             metrics=['accuracy'])
+
+model.fit(xtrain_scale, ytrain, epochs=1000)
